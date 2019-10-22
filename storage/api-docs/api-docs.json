@@ -1,0 +1,802 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Test Rest API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api/v1/",
+            "description": "OpenApi host"
+        }
+    ],
+    "paths": {
+        "/advert": {
+            "get": {
+                "tags": [
+                    "Adverts"
+                ],
+                "summary": "Get list of adverts",
+                "description": "Get list of adverts",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\AdvertController::index",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Adverts"
+                ],
+                "summary": "Create new advert",
+                "description": "Create new advert",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\AdvertController::store",
+                "requestBody": {
+                    "description": "Advert object that needs to be added to the store",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Advert"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "404": {
+                        "description": "Advert is not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/advert/{id}": {
+            "get": {
+                "tags": [
+                    "Adverts"
+                ],
+                "summary": "Get advert by id",
+                "description": "Get advert by id",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\AdvertController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Advert ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "404": {
+                        "description": "Advert is not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Adverts"
+                ],
+                "summary": "Update advert by id",
+                "description": "Update advert by id",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\AdvertController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Advert ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Advert object that needs to be added to the store",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Advert"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "404": {
+                        "description": "Advert is not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Adverts"
+                ],
+                "summary": "Delete advert by id",
+                "description": "Delete advert by id",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\AdvertController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Advert ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "403": {
+                        "description": "Access denied"
+                    },
+                    "404": {
+                        "description": "Advert is not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/auth/signin": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Sign In",
+                "description": "Sign In",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\AuthController::signin",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            }
+        },
+        "/auth/signout": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Sign Out",
+                "description": "Sign Out",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\AuthController::signout",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Sign Out",
+                "description": "Sign Out",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\AuthController::signout",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/auth/signup": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Sign Up",
+                "description": "Sign Up",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\AuthController::signup",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/auth/refresh": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Refresh token",
+                "description": "Refresh token",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\AuthController::refresh",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/category": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get list of category",
+                "description": "Get list of category",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\CategoryController::index",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Create new category",
+                "description": "Create new category",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\CategoryController::store",
+                "requestBody": {
+                    "description": "Category object that needs to be added to the store",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Category"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "404": {
+                        "description": "Category is not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/category/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get category by id",
+                "description": "Get category by id",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\CategoryController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "404": {
+                        "description": "Category is not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update category by id",
+                "description": "Update category by id",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\CategoryController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Category object that needs to be added to the store",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Category"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "404": {
+                        "description": "Category is not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete category by id",
+                "description": "Delete category by id",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\CategoryController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "404": {
+                        "description": "Category is not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/comment": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Get list of comments",
+                "description": "Get list of comments",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\CommentController::index",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Create new comment",
+                "description": "Create new comment",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\CommentController::store",
+                "requestBody": {
+                    "description": "Comment object that needs to be added to the store",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Comment"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "404": {
+                        "description": "Comment is not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/comment/{id}": {
+            "get": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Get comment by id",
+                "description": "Get comment by id",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\CommentController::show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Comment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "404": {
+                        "description": "Comment is not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Update comment by id",
+                "description": "Update comment by id",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\CommentController::update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Comment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Comment object that needs to be added to the store",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Comment"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "404": {
+                        "description": "Comment is not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Comments"
+                ],
+                "summary": "Delete comment by id",
+                "description": "Delete comment by id",
+                "operationId": "App\\Http\\Controllers\\Api\\v1\\CommentController::destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Comment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized user"
+                    },
+                    "403": {
+                        "description": "Access denied"
+                    },
+                    "404": {
+                        "description": "Comment is not found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Advert": {
+                "title": "Adverts Schema",
+                "description": "Adverts",
+                "required": [
+                    "id",
+                    "name",
+                    "description",
+                    "authorId",
+                    "categoryId"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Advert ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Name|Title",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string"
+                    },
+                    "authorId": {
+                        "description": "Author ID",
+                        "type": "integer"
+                    },
+                    "categoryId": {
+                        "description": "Category ID",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "description": "Status (0 - not active, 1 - active)",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "Created at",
+                        "type": "integer"
+                    },
+                    "updated_at": {
+                        "description": "Updated at",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Category": {
+                "title": "Categories Schema",
+                "description": "Categories",
+                "required": [
+                    "id",
+                    "name",
+                    "description",
+                    "parentId"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Category ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Name|Title",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Description",
+                        "type": "string"
+                    },
+                    "parentId": {
+                        "description": "Parent ID",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "description": "Status (0 - not active, 1 - active)",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "Created at",
+                        "type": "integer"
+                    },
+                    "updated_at": {
+                        "description": "Updated at",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Comment": {
+                "title": "Adverts Schema",
+                "description": "Adverts",
+                "required": [
+                    "id",
+                    "message",
+                    "authorId",
+                    "advertId"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "Advert ID",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "description": "Message",
+                        "type": "string"
+                    },
+                    "authorId": {
+                        "description": "Author ID",
+                        "type": "integer"
+                    },
+                    "advertId": {
+                        "description": "Advert ID",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "description": "Status (0 - not active, 1 - active)",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "description": "Created at",
+                        "type": "integer"
+                    },
+                    "updated_at": {
+                        "description": "Updated at",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "Users Schema",
+                "description": "Users",
+                "required": [
+                    "id",
+                    "name",
+                    "email"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "User ID",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Name",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Created at",
+                        "type": "integer"
+                    },
+                    "updated_at": {
+                        "description": "Updated at",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "http",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://127.0.0.1:8000/api/v1/auth/authorize",
+                        "tokenUrl": "http://127.0.0.1:8000/api/v1/auth/token",
+                        "refreshUrl": "http://127.0.0.1:8000/api/v1/auth/token/refresh",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth endpoints"
+        },
+        {
+            "name": "Adverts",
+            "description": "Adverts endpoints"
+        },
+        {
+            "name": "Categories",
+            "description": "Categories endpoints"
+        },
+        {
+            "name": "Comments",
+            "description": "Comments endpoints"
+        }
+    ]
+}
